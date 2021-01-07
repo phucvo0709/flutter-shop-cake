@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:flutter_shop_cake/screens/verify_phone_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   static const routeName = "/create-account";
@@ -281,7 +282,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: RaisedButton(
                           onPressed: () {
-                            print('ok');
+                            Navigator.of(context).pushReplacementNamed(
+                                VerifyPhoneScreen.routeName);
                             if (_formKey.currentState.validate()) {
                               final snackBar =
                                   SnackBar(content: Text('Processing data'));

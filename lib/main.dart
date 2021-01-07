@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: "Avenir",
       ),
-      home: VerifyPhoneScreen(),
+      home: WelcomeScreen(),
       routes: {
         WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
         CreateAccountScreen.routeName: (ctx) => CreateAccountScreen(),

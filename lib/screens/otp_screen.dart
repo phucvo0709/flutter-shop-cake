@@ -16,10 +16,10 @@ class _OtpScreenState extends State<OtpScreen> {
   FocusNode numberTwoFocusNode;
   FocusNode numberThreeFocusNode;
   FocusNode numberFourFocusNode;
-  TextEditingController _numberOne = TextEditingController();
-  TextEditingController _numberTwo = TextEditingController();
-  TextEditingController _numberThree = TextEditingController();
-  TextEditingController _numberFour = TextEditingController();
+  String _numberOne = "";
+  String _numberTwo = "";
+  String _numberThree = "";
+  String _numberFour = "";
 
   @override
   void initState() {
@@ -32,10 +32,10 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   void dispose() {
-    _numberOne.text = "";
-    _numberTwo.text = "";
-    _numberThree.text = "";
-    _numberFour.text = "";
+    _numberOne = "";
+    _numberTwo = "";
+    _numberThree = "";
+    _numberFour = "";
     numberOneFocusNode.dispose();
     numberTwoFocusNode.dispose();
     numberThreeFocusNode.dispose();
@@ -44,10 +44,10 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void _handleResetOtp() {
-    _numberOne.text = "";
-    _numberTwo.text = "";
-    _numberThree.text = "";
-    _numberFour.text = "";
+    _numberOne = "";
+    _numberTwo = "";
+    _numberThree = "";
+    _numberFour = "";
     _formKey.currentState.reset();
     FocusScope.of(context).requestFocus(numberOneFocusNode);
   }
@@ -123,9 +123,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
                                 maxLength: 1,
-                                controller: _numberOne,
                                 style: TextStyle(
-                                  color: _numberOne.text.isEmpty
+                                  color: _numberOne.isEmpty
                                       ? colorConstant.blackColor
                                       : Colors.white,
                                   fontSize: 30.0,
@@ -140,11 +139,14 @@ class _OtpScreenState extends State<OtpScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: _numberOne.text.isEmpty
+                                  fillColor: _numberOne.isEmpty
                                       ? Color(0xff8e8e93).withOpacity(0.12)
                                       : Theme.of(context).primaryColor,
                                 ),
-                                onChanged: (_) {
+                                onChanged: (value) {
+                                  setState(() {
+                                    _numberOne = value;
+                                  });
                                   numberOneFocusNode.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(numberTwoFocusNode);
@@ -162,9 +164,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
                                 maxLength: 1,
-                                controller: _numberTwo,
                                 style: TextStyle(
-                                  color: _numberTwo.text.isEmpty
+                                  color: _numberTwo.isEmpty
                                       ? colorConstant.blackColor
                                       : Colors.white,
                                   fontSize: 30.0,
@@ -179,11 +180,14 @@ class _OtpScreenState extends State<OtpScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: _numberTwo.text.isEmpty
+                                  fillColor: _numberTwo.isEmpty
                                       ? Color(0xff8e8e93).withOpacity(0.12)
                                       : Theme.of(context).primaryColor,
                                 ),
-                                onChanged: (_) {
+                                onChanged: (value) {
+                                  setState(() {
+                                    _numberTwo = value;
+                                  });
                                   numberTwoFocusNode.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(numberThreeFocusNode);
@@ -201,9 +205,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
                                 maxLength: 1,
-                                controller: _numberThree,
                                 style: TextStyle(
-                                  color: _numberThree.text.isEmpty
+                                  color: _numberThree.isEmpty
                                       ? colorConstant.blackColor
                                       : Colors.white,
                                   fontSize: 30.0,
@@ -218,11 +221,14 @@ class _OtpScreenState extends State<OtpScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: _numberThree.text.isEmpty
+                                  fillColor: _numberThree.isEmpty
                                       ? Color(0xff8e8e93).withOpacity(0.12)
                                       : Theme.of(context).primaryColor,
                                 ),
-                                onChanged: (_) {
+                                onChanged: (value) {
+                                  setState(() {
+                                    _numberThree = value;
+                                  });
                                   numberThreeFocusNode.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(numberFourFocusNode);
@@ -240,9 +246,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
                                 maxLength: 1,
-                                controller: _numberFour,
                                 style: TextStyle(
-                                  color: _numberFour.text.isEmpty
+                                  color: _numberFour.isEmpty
                                       ? colorConstant.blackColor
                                       : Colors.white,
                                   fontSize: 30.0,
@@ -257,11 +262,14 @@ class _OtpScreenState extends State<OtpScreen> {
                                     borderSide: BorderSide.none,
                                   ),
                                   filled: true,
-                                  fillColor: _numberFour.text.isEmpty
+                                  fillColor: _numberFour.isEmpty
                                       ? Color(0xff8e8e93).withOpacity(0.12)
                                       : Theme.of(context).primaryColor,
                                 ),
-                                onChanged: (_) {
+                                onChanged: (value) {
+                                  setState(() {
+                                    _numberFour = value;
+                                  });
                                   numberFourFocusNode.unfocus();
                                 },
                               ),
