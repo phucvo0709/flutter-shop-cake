@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  final ColorConstant colorConstant = ColorConstant();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 90.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -70,6 +73,65 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 90.0,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 44.0,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Log In",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17.0,
+                            letterSpacing: -0.2,
+                          ),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(22.0),
+                        ),
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 44.0,
+                      child: RaisedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              iconSize: 20.0,
+                              icon: Icon(
+                                FontAwesomeIcons.facebookSquare,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                            Text(
+                              "Connect with facebook",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17.0,
+                                letterSpacing: -0.2,
+                              ),
+                            ),
+                          ],
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(22.0),
+                        ),
+                        color: colorConstant.blueColor,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
-import 'package:flutter_shop_cake/screens/WelcomeScreen/welcome_screen.dart';
+import 'package:flutter_shop_cake/screens/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
