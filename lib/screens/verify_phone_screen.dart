@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:flutter_shop_cake/screens/otp_screen.dart';
 import 'package:flutter_shop_cake/screens/welcome_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -15,6 +16,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   final ColorConstant colorConstant = ColorConstant();
   final _globalKey = GlobalKey<ScaffoldState>();
   String _hintTextPhone = "Phone";
+  String _phoneNumber = "";
   FocusNode phoneFocusNode;
 
   @override
@@ -25,14 +27,22 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
       if (phoneFocusNode.hasFocus) {
         _hintTextPhone = '';
       } else {
-        _hintTextPhone = 'Phone';
+        if (_phoneNumber.isEmpty || _phoneNumber.length <= 2) {
+          _hintTextPhone = 'Phone';
+        }
       }
       setState(() {});
     });
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
+    _phoneNumber = "";
     phoneFocusNode.dispose();
     super.dispose();
   }
@@ -55,10 +65,10 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: Colors.white,
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Padding(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                 child: Column(
                   children: [
@@ -101,13 +111,26 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                         ),
                         child: IntlPhoneField(
                           focusNode: phoneFocusNode,
+                          initialCountryCode: "VN",
                           decoration: InputDecoration(
                             labelText: _hintTextPhone,
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 0, color: Colors.transparent),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 0, color: Colors.transparent),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 0, color: Colors.transparent),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 0, color: Colors.transparent),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(vertical: 0),
                             hintStyle: TextStyle(
                               color: colorConstant.greyColor,
                               letterSpacing: -0.4,
@@ -117,7 +140,9 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                             if (phone.completeNumber.isEmpty) {
                               return 'Please enter some text';
                             }
-                            print(phone.completeNumber);
+                            setState(() {
+                              _phoneNumber = phone.completeNumber;
+                            });
                           },
                         ),
                       ),
@@ -161,29 +186,41 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  height: 44.0,
-                  width: MediaQuery.of(context).size.width,
-                  child: RaisedButton(
-                    onPressed: () {
-                      print('ok');
-                    },
-                    color: Theme.of(context).primaryColor,
-                    child: Text(
-                      "Next",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.0,
-                        letterSpacing: -0.2,
-                      ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                height: 44.0,
+                width: MediaQuery.of(context).size.width,
+                child: RaisedButton(
+                  onPressed: () => {
+                    // Navigator.of(context).pushNamed(OtpScreen.routeName);
+                    if (_phoneNumber.isEmpty || _phoneNumber.length <= 2)
+                      {
+                        _globalKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: Text('Please enter number phone'),
+                          ),
+                        ),
+                      }
+                    else
+                      {
+                        Navigator.of(context).pushNamed(OtpScreen.routeName),
+                      }
+                  },
+                  color: Theme.of(context).primaryColor,
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17.0,
+                      letterSpacing: -0.2,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
