@@ -10,10 +10,38 @@ class CreateAccountScreen extends StatefulWidget {
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final ColorConstant colorConstant = ColorConstant();
+  final _globalKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
+  FocusNode userNameFocusNode;
+  FocusNode emailFocusNode;
+  FocusNode phoneFocusNode;
+  FocusNode dateOfBirthFocusNode;
+  FocusNode passwordFocusNode;
+
+  @override
+  void initState() {
+    userNameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    phoneFocusNode = FocusNode();
+    dateOfBirthFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    userNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    phoneFocusNode.dispose();
+    dateOfBirthFocusNode.dispose();
+    passwordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -24,22 +52,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.white,
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 Text(
                   "Create an account",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: colorConstant.blackColor,
                     fontSize: 34.0,
-                    height: 2.0,
+                    height: 1.4,
+                    letterSpacing: 0.6,
                   ),
                 ),
                 SizedBox(
@@ -52,6 +81,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextFormField(
+                        focusNode: userNameFocusNode,
+                        onFieldSubmitted: (_) {
+                          userNameFocusNode.unfocus();
+                          FocusScope.of(context).requestFocus(emailFocusNode);
+                        },
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: "Username",
                           filled: true,
@@ -86,6 +121,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
+                        focusNode: emailFocusNode,
+                        onFieldSubmitted: (_) {
+                          emailFocusNode.unfocus();
+                          FocusScope.of(context).requestFocus(phoneFocusNode);
+                        },
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: "Email",
                           filled: true,
@@ -109,8 +150,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           ),
                         ),
                         validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter some text';
+                          if (value.isEmpty || !value.contains('@')) {
+                            return 'Invalid email!';
                           }
                           return null;
                         },
@@ -119,7 +160,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        focusNode: phoneFocusNode,
                         keyboardType: TextInputType.number,
+                        onFieldSubmitted: (_) {
+                          phoneFocusNode.unfocus();
+                          FocusScope.of(context)
+                              .requestFocus(dateOfBirthFocusNode);
+                        },
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: "Phone",
                           filled: true,
@@ -153,7 +201,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        focusNode: dateOfBirthFocusNode,
                         keyboardType: TextInputType.datetime,
+                        onFieldSubmitted: (_) {
+                          dateOfBirthFocusNode.unfocus();
+                          FocusScope.of(context)
+                              .requestFocus(passwordFocusNode);
+                        },
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           hintText: "Date Of Birth",
                           filled: true,
@@ -187,6 +242,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         height: 10.0,
                       ),
                       TextFormField(
+                        focusNode: passwordFocusNode,
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: "Password",
@@ -225,9 +281,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: RaisedButton(
                           onPressed: () {
+                            print('ok');
                             if (_formKey.currentState.validate()) {
-                              Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text('Processing Data')));
+                              final snackBar =
+                                  SnackBar(content: Text('Processing data'));
+                              _globalKey.currentState.showSnackBar(snackBar);
                             }
                           },
                           shape: RoundedRectangleBorder(

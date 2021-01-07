@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  static const routeName = "/welcome";
   final ColorConstant colorConstant = ColorConstant();
   @override
   Widget build(BuildContext context) {
