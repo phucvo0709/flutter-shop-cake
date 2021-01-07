@@ -27,6 +27,7 @@ dependencies:
   font_awesome_flutter: ^8.11.0
   google_fonts: ^1.1.1
   page_transition: ^1.1.7+5
+  intl_phone_field: ^1.4.2
 
 dev_dependencies:
   flutter_test:
