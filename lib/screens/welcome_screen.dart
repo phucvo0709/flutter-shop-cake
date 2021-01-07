@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:flutter_shop_cake/screens/create_account_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final ColorConstant colorConstant = ColorConstant();
@@ -42,7 +44,6 @@ class WelcomeScreen extends StatelessWidget {
                       'Delivered fast Food to your door.'.toUpperCase(),
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: "Avenir",
                         fontSize: 44.0,
                         fontWeight: FontWeight.bold,
                         letterSpacing: -0.01,
@@ -80,7 +81,15 @@ class WelcomeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: 44.0,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.leftToRightWithFade,
+                              child: CreateAccountScreen(),
+                            ),
+                          );
+                        },
                         child: Text(
                           "Log In",
                           style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:flutter_shop_cake/screens/create_account_screen.dart';
 import 'package:flutter_shop_cake/screens/welcome_screen.dart';
 
 void main() {
@@ -17,8 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: colorConstant.primaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: "Avenir",
       ),
       home: WelcomeScreen(),
+      routes: {CreateAccountScreen.routeName: (ctx) => CreateAccountScreen()},
     );
   }
 }
