@@ -11,7 +11,7 @@ Widget homeScreenContent(BuildContext context) {
   return SingleChildScrollView(
     physics: BouncingScrollPhysics(),
     child: Container(
-      padding: EdgeInsets.all(14.0),
+      padding: EdgeInsets.fromLTRB(14.0, 0.0, 14.0, 14.0),
       color: Colors.white,
       width: MediaQuery.of(context).size.width,
       child: Column(
