@@ -57,6 +57,7 @@ Widget popularCakesWidget(BuildContext context) {
           maxHeight: popularCakes.length * 120.0,
         ),
         child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: popularCakes.length,
           itemBuilder: (_, i) => Container(
             height: 104.0,

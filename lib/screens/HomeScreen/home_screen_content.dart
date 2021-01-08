@@ -9,6 +9,7 @@ final ColorConstant colorConstant = ColorConstant();
 
 Widget homeScreenContent(BuildContext context) {
   return SingleChildScrollView(
+    physics: BouncingScrollPhysics(),
     child: Container(
       padding: EdgeInsets.all(14.0),
       color: Colors.white,

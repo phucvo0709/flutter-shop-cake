@@ -26,6 +26,7 @@ Widget discoverCakesWidget(BuildContext context) {
           height: 335.0,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: featuresCake.length,
             itemBuilder: (_, i) => Container(

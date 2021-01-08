@@ -54,6 +54,7 @@ Widget categoriesWidget(BuildContext context) {
           height: 142.0,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
             itemBuilder: (_, i) => Container(

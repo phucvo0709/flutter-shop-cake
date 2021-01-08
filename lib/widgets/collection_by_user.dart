@@ -60,6 +60,7 @@ Widget collectionByUser(BuildContext context) {
           height: 136.0,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: collection.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, i) => ClipRRect(
