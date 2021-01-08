@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
 import 'package:flutter_shop_cake/models/user.dart';
+import 'package:flutter_shop_cake/screens/collection_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 final ColorConstant colorConstant = ColorConstant();
 
 Widget collectionByUser(BuildContext context) {
-  final userProvider = Provider.of<DetailUser>(context, listen: false);
+  final userProvider = Provider.of<DetailUser>(context);
   final collection = userProvider.collection;
 
   return Padding(
@@ -64,21 +66,32 @@ Widget collectionByUser(BuildContext context) {
               borderRadius: BorderRadius.all(
                 Radius.circular(8.0),
               ),
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: 230.0,
-                margin: i == 0
-                    ? EdgeInsets.only(right: 16.0)
-                    : i > 0 && i != collection.length - 1
-                        ? EdgeInsets.only(right: 16.0)
-                        : null,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(collection[i].imgSrc),
-                    fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.leftToRightWithFade,
+                      child: CollectionScreen(collection: collection),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: 230.0,
+                  margin: i == 0
+                      ? EdgeInsets.only(right: 16.0)
+                      : i > 0 && i != collection.length - 1
+                          ? EdgeInsets.only(right: 16.0)
+                          : null,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(collection[i].imgSrc),
+                      fit: BoxFit.cover,
+                    ),
                   ),
+                  child: null,
                 ),
-                child: null,
               ),
             ),
           ),

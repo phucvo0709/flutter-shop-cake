@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _searchFocusNode = FocusNode();
     _searchFocusNode.addListener(_onOnFocusNodeEvent);
-
+    Future.delayed(Duration.zero, () async {
+      Provider.of<DetailUser>(context, listen: false).onGetCollectionByUser(1);
+    });
     super.initState();
   }
 
