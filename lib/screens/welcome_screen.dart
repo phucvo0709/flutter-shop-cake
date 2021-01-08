@@ -113,7 +113,15 @@ class WelcomeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: 44.0,
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.leftToRightWithFade,
+                              child: HomeScreen(),
+                            ),
+                          );
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,16 +132,7 @@ class WelcomeScreen extends StatelessWidget {
                                 FontAwesomeIcons.facebookSquare,
                                 color: Colors.white,
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type:
-                                        PageTransitionType.leftToRightWithFade,
-                                    child: HomeScreen(),
-                                  ),
-                                );
-                              },
+                              onPressed: null,
                             ),
                             Text(
                               "Connect with facebook",
