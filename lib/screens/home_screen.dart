@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
+import 'package:flutter_shop_cake/models/user.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/home_screen_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_favorite_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_order_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_profile.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -17,19 +19,38 @@ class _HomeScreenState extends State<HomeScreen> {
   // end nav bar
   final ColorConstant colorConstant = ColorConstant();
   final TextEditingController _searchController = new TextEditingController();
-  FocusNode searchFocusNode;
+  FocusNode _searchFocusNode;
 
   @override
   void initState() {
-    searchFocusNode = FocusNode();
+    _searchFocusNode = FocusNode();
+    _searchFocusNode.addListener(_onOnFocusNodeEvent);
+
     super.initState();
   }
 
   @override
+  void didChangeDependencies() {
+    if (_selectedIndex == 0) {
+      Future.delayed(Duration.zero, () async {
+        Provider.of<DetailUser>(context, listen: false)
+            .onGetCollectionByUser(1);
+      });
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
-    searchFocusNode.dispose();
+    _searchFocusNode.dispose();
     _searchController.clear();
     super.dispose();
+  }
+
+  _onOnFocusNodeEvent() {
+    setState(() {
+      // Re-renders
+    });
   }
 
   // bottom nav bar
@@ -38,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
   }
+
   // end nav bar
 
   @override
@@ -48,6 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
       myFavoriteContent(context),
       myProfileContent(context),
     ];
+    Color getPrefixIconColor() {
+      return _searchFocusNode.hasFocus
+          ? Theme.of(context).primaryColor
+          : colorConstant.greyColor;
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70),
@@ -55,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
           data: ThemeData(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
+            cursorColor: Theme.of(context).primaryColor,
           ),
           child: AppBar(
             backgroundColor: Colors.white,
@@ -66,13 +95,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 40.0,
                   child: TextFormField(
                     controller: _searchController,
-                    focusNode: searchFocusNode,
+                    focusNode: _searchFocusNode,
                     textAlignVertical: TextAlignVertical.center,
                     textAlign: TextAlign.left,
                     maxLines: 1,
                     decoration: InputDecoration(
                       hintText: "Search",
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: getPrefixIconColor(),
+                      ),
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0, horizontal: 14.0),
                       enabledBorder: OutlineInputBorder(
