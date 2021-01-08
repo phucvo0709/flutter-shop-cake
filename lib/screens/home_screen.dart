@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
 import 'package:flutter_shop_cake/models/cakes.dart';
+import 'package:flutter_shop_cake/models/categories.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final cakesProvider = Provider.of<Cakes>(context, listen: false);
+    final categoriesProvider = Provider.of<Categories>(context, listen: false);
     final featuresCake = cakesProvider.featuresCakes;
+    final categories = categoriesProvider.categories;
 
     return Scaffold(
       appBar: AppBar(
@@ -121,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20.0,
               ),
               SizedBox(
-                height: 393.0,
+                height: 335.0,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -129,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (_, i) => Container(
                     height: MediaQuery.of(context).size.height,
                     width: 200.0,
-                    padding: i == 0
+                    margin: i == 0
                         ? EdgeInsets.only(right: 17.0)
                         : i > 0 && i != featuresCake.length - 1
                             ? EdgeInsets.only(right: 17.0)
@@ -144,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Container(
                               height: 250.0,
-                              width: MediaQuery.of(context).size.width,
+                              width: 200.0,
                               decoration: BoxDecoration(
                                 color: Colors.red,
                                 image: DecorationImage(
@@ -159,6 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Text(
                             featuresCake[i].name,
+                            maxLines: 1,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17.0,
@@ -170,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Text(
                             featuresCake[i].address,
+                            maxLines: 1,
                             textAlign: TextAlign.center,
                             style: GoogleFonts.roboto(
                               textStyle: TextStyle(
@@ -200,28 +205,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Color(0xFFFFCC00),
                                     ),
                                     SizedBox(
-                                      width: 1.0,
+                                      width: 2.0,
                                     ),
                                     Text(
                                       featuresCake[i].stars.toString(),
                                       style: GoogleFonts.roboto(
                                         textStyle: TextStyle(
                                           color: colorConstant.blackColor,
-                                          fontSize: 12.0,
+                                          fontSize: 13.0,
                                           letterSpacing: -0.08,
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 2.0,
+                                      width: 4.0,
                                     ),
                                     Text(
                                       "(${featuresCake[i].ratings.toString()} ratings)",
                                       style: GoogleFonts.roboto(
                                         textStyle: TextStyle(
                                           color: colorConstant.greyColor,
-                                          fontSize: 12.0,
+                                          fontSize: 13.0,
                                           letterSpacing: -0.08,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -246,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     style: GoogleFonts.roboto(
                                       textStyle: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 10.0,
+                                        fontSize: 11.0,
                                         letterSpacing: -0.07,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -261,7 +266,111 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 27.0,
+              ),
+              SizedBox(
+                height: 25.0,
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Top categories",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        letterSpacing: 0.38,
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: GoogleFonts.roboto(
+                          textStyle: TextStyle(
+                            color: colorConstant.blackColor,
+                            fontSize: 15.0,
+                            letterSpacing: -0.24,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        text: "Show all",
+                        children: [
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.middle,
+                            child: Icon(Icons.arrow_right),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              SizedBox(
+                height: 142.0,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (_, i) => Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: 100.0,
+                    margin: i == 0
+                        ? EdgeInsets.only(right: 16.0)
+                        : i > 0 && i != categories.length - 1
+                            ? EdgeInsets.only(right: 16.0)
+                            : null,
+                    child: Card(
+                      elevation: 0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 88.0,
+                            height: 88.0,
+                            decoration: BoxDecoration(
+                              color: categories[i].color,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8.0),
+                              ),
+                            ),
+                            child: Center(
+                              child: Image.asset(categories[i].imgSrc),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 3.0),
+                            child: Text(
+                              categories[i].name,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 17.0,
+                                letterSpacing: -0.41,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${categories[i].places} places",
+                            maxLines: 1,
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(
+                                color: colorConstant.greyColor,
+                                fontSize: 13.0,
+                                letterSpacing: -0.08,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

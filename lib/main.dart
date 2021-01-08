@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
 import 'package:flutter_shop_cake/models/cakes.dart';
+import 'package:flutter_shop_cake/models/categories.dart';
 import 'package:flutter_shop_cake/screens/create_account_screen.dart';
 import 'package:flutter_shop_cake/screens/home_screen.dart';
 import 'package:flutter_shop_cake/screens/otp_screen.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => Cakes(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Categories(),
         ),
       ],
       child: MaterialApp(

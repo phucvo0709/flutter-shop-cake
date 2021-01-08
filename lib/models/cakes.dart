@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class Cake {
   final int id;
@@ -26,8 +26,8 @@ class Cakes with ChangeNotifier {
   List<Cake> _cakes = [
     Cake(
       id: 1,
-      name: "Andy & Cindy's Diner",
-      address: "87 Botsford Circle Apt",
+      name: "Andy & Cindy's Diner The Garage Bar & Grill 2",
+      address: "apt The Garage Bar & Grill 2",
       imgUrl: "assets/images/cake-1.png",
       stars: 4.8,
       ratings: 223,
@@ -36,7 +36,7 @@ class Cakes with ChangeNotifier {
     ),
     Cake(
       id: 2,
-      name: "The Garage Bar & Grill",
+      name: "The Garage Bar & Grill The Garage Bar & Grill 2",
       address: "1175 Gislason Shore Apt. 658",
       imgUrl: "assets/images/cake-2.png",
       stars: 4.3,
@@ -46,13 +46,13 @@ class Cakes with ChangeNotifier {
     ),
     Cake(
       id: 3,
-      name: "The Garage Bar & Grill 2",
+      name: "The Garage Bar & Grill 2 The Garage Bar & Grill 2",
       address: "1175 Gislason Shore Apt. 658",
       imgUrl: "assets/images/cake-2.png",
       stars: 4.3,
       ratings: 135,
       freeShipping: true,
-      featured: false,
+      featured: true,
     ),
   ];
 
