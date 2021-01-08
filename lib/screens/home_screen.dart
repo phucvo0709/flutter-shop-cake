@@ -5,6 +5,7 @@ import 'package:flutter_shop_cake/screens/HomeScreen/home_screen_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_favorite_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_order_content.dart';
 import 'package:flutter_shop_cake/screens/HomeScreen/my_profile.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // bottom nav bar
   int _selectedIndex = 0;
   // end nav bar
+  DateTime currentBackPressTime;
   final ColorConstant colorConstant = ColorConstant();
   final TextEditingController _searchController = new TextEditingController();
   FocusNode _searchFocusNode;
@@ -164,7 +166,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: WillPopScope(
+          child: _widgetOptions.elementAt(_selectedIndex),
+          onWillPop: onWillPop),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -191,5 +195,16 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Fluttertoast.showToast(msg: "double tap to back");
+      return Future.value(false);
+    }
+    return Future.value(true);
   }
 }

@@ -68,6 +68,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
         child: Stack(
           children: [
             SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                 child: Column(

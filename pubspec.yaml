@@ -29,6 +29,7 @@ dependencies:
   intl_phone_field: ^1.4.2
   page_transition: ^1.1.7+5
   provider: ^4.3.2+3
+  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:

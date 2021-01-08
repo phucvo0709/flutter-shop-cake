@@ -71,6 +71,7 @@ class _OtpScreenState extends State<OtpScreen> {
         width: MediaQuery.of(context).size.width,
         color: Colors.white,
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
             child: Column(

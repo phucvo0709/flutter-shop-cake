@@ -60,6 +60,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 Text(

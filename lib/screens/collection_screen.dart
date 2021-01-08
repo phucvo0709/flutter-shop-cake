@@ -27,6 +27,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.all(15.0),
           child: Container(
