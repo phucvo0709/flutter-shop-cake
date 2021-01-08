@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_cake/constants/color_constant.dart';
 import 'package:flutter_shop_cake/screens/create_account_screen.dart';
+import 'package:flutter_shop_cake/screens/home_screen.dart';
 import 'package:flutter_shop_cake/screens/otp_screen.dart';
 import 'package:flutter_shop_cake/screens/verify_phone_screen.dart';
 import 'package:flutter_shop_cake/screens/welcome_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         CreateAccountScreen.routeName: (ctx) => CreateAccountScreen(),
         VerifyPhoneScreen.routeName: (ctx) => VerifyPhoneScreen(),
         OtpScreen.routeName: (ctx) => OtpScreen(),
+        HomeScreen.routeName: (ctx) => HomeScreen(),
       },
     );
   }
